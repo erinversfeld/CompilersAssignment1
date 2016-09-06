@@ -7,11 +7,11 @@ import lex_bla
 #conditional lexing stuff, generate tokens
 lex_bla.t_WHITESPACE = r"$a"
 lex_bla.t_COMMENT = r"$a"
-lex_bla.t_ignore_WHITESPACE = r"(\ |\\r|\\t|\\a|\\b|\\cx|\\C-x|\\e|\\f|\\M-\\C-x|\\n|\\d|\\nnn|\\r|\\s|\\v|\\x|\\xnn)+"
-lex_bla.t_ignore_COMMENT = r"(\/\/.*)|()\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
+lex_bla.t_ignore_WHITESPACE = r"(\ |\r|\t|\n)+"
+lex_bla.t_ignore_COMMENT = r"(\/\/.*)|(\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 lex_bla.main()
 
-from ..bla.lex_bla import tokens
+from lex_bla import tokens
 
 #second argument to the CL is the name of the file to parse
 input_file_name = sys.argv[1]
@@ -21,6 +21,7 @@ output_file_name = base_file_name+".ast"
 #parser
 p = yacc.yacc()
 
+open(output_file_name, 'w').close()#apparently this works?
 output_file = open(output_file_name, 'a')
 output = p.parse(open(input_file_name, 'r').read())
 output_file.write('Program\n')

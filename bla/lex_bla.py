@@ -1,6 +1,6 @@
 __author__ = 'ErinV'
 
-from ply import lex
+from ..ply import lex
 import sys
 
 #token names
@@ -36,6 +36,9 @@ t_COMMENT = r"(\/\/.*)|()\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 file_name = sys.argv[1]
 
 def main():
+    """
+    Function to work through a file, checking if any of the expected tokens are in the file
+    """
     lex.lex()
     lex.input(open(file_name, 'r').read())
 
@@ -45,12 +48,12 @@ if __name__ == '__main__':
     base_name = file_name.split(".")[0].strip()
     o_file_name = base_name+".tkn"
     output_file = open(o_file_name, 'a')
-    print_by_type = ["A", "S", "M", "D", "WHITESPACE", "COMMENT"]
-    print_by_value = ["EQUALS", "OPEN_PAREN", "CLOSE_PAREN"]
+    lex_by_type = ["A", "S", "M", "D", "WHITESPACE", "COMMENT"]
+    lex_by_value = ["EQUALS", "OPEN_PAREN", "CLOSE_PAREN"]
     for token in iter(lex.token, None):
-        if token.type in print_by_type:
+        if token.type in lex_by_type:
             output_file.write(token.type + "\n")
-        elif token.type in print_by_value:
+        elif token.type in lex_by_value:
             output_file.write(token.value + "\n")
         else:
             output_file.write(token.type + "," + token.value + "\n")

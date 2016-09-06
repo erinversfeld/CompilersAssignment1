@@ -1,10 +1,10 @@
 __author__ = 'ErinV'
 
-from ..ply import lex
+from ply import lex
 import sys
 
 #token names
-tokens = {
+tokens = (
     "ID",
     "BINARY_LITERAL",
     "A",
@@ -16,7 +16,7 @@ tokens = {
     "CLOSE_PAREN",
     "WHITESPACE",
     "COMMENT"
-}
+)
 
 #rules
 t_ID = r"([a-z]|_)([a-z]|_|\d)*"

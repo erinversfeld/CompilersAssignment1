@@ -1,8 +1,8 @@
 __author__ = 'ErinV'
 
-from ..ply import yacc, lex
+from ply import yacc, lex
 import sys
-from ..bla import lex_bla
+import lex_bla
 
 #conditional lexing stuff, generate tokens
 lex_bla.t_WHITESPACE = r"$a"

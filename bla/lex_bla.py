@@ -29,8 +29,11 @@ t_EQUALS = r"="
 t_OPEN_PAREN = r"\("
 t_CLOSE_PAREN = r"\)"
 #need to confirm the strictness of non-printable...
-t_WHITESPACE = r"(\ |\\r|\\t|\\a|\\b|\\cx|\\C-x|\\e|\\f|\\M-\\C-x|\\n|\\d|\\nnn|\\r|\\s|\\v|\\x|\\xnn)+"
+t_WHITESPACE = r"(\ |\t|\n|\r)+"
 t_COMMENT = r"(\/\/.*)|(\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
+
+def t_error(t):
+   print("Illegal character '%s'" % t.value[0])
 
 #second argument passed to the command line is the name of the file from which input is to be read
 file_name = sys.argv[1]

@@ -19,7 +19,8 @@ base_file_name = input_file_name.split(".")[0].strip()
 output_file_name = base_file_name+".ast"
 
 def p_program(p):
-    'program : program statement | empty'
+    '''program : program statement
+			   | empty'''
     p[0] = []
     for i in range(1, len(p)):
         if p[i]:

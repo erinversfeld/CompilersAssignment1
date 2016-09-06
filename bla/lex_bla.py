@@ -44,3 +44,13 @@ if __name__ == '__main__':
     #make the .tkn file
     base_name = file_name.split(".")[0].strip()
     o_file_name = base_name+".tkn"
+    output_file = open(o_file_name, 'a')
+    print_by_type = ["A", "S", "M", "D", "WHITESPACE", "COMMENT"]
+    print_by_value = ["EQUALS", "OPEN_PAREN", "CLOSE_PAREN"]
+    for token in iter(lex.token, None):
+        if token.type in print_by_type:
+            output_file.write(token.type + "\n")
+        elif token.type in print_by_value:
+            output_file.write(token.value + "\n")
+        else:
+            output_file.write(token.type + "," + token.value + "\n")

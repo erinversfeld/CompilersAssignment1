@@ -29,7 +29,7 @@ t_EQUALS = r"="
 t_OPEN_PAREN = r"\("
 t_CLOSE_PAREN = r"\)"
 #need to confirm the strictness of non-printable...
-t_WHITESPACE = r"(\ |\t|\n|\r)+"
+t_WHITESPACE = r"(\ |\r|\t|\n)+"
 t_COMMENT = r"(\/\/.*)|(\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 
 def t_error(t):

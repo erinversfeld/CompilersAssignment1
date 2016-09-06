@@ -28,7 +28,8 @@ t_D = r"D"
 t_EQUALS = r"="
 t_OPEN_PAREN = r"("
 t_CLOSE_PAREN = r")"
-t_WHITESPACE = r"(\ |\t|\n|\r)+"
+#need to confirm the strictness of non-printable...
+t_WHITESPACE = r"(\ |\\r|\\t|\\a|\\b|\\cx|\\C-x|\\e|\\f|\\M-\\C-x|\\n|\\d|\\nnn|\\r|\\s|\\v|\\x|\\xnn)+"
 t_COMMENT = r"(\/\/.*)|()\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 
 #second argument passed to the command line is the name of the file from which input is to be read

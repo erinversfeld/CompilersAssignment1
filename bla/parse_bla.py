@@ -5,8 +5,10 @@ import sys
 from ..bla import lex_bla
 
 #conditional lexing stuff, generate tokens
-lex_bla.t_ignore_WHITESPACE = lex_bla.t_WHITESPACE
-lex_bla.t_ignore_COMMENT = lex_bla.t_COMMENT
+lex_bla.t_WHITESPACE = r"$a"
+lex_bla.t_COMMENT = r"$a"
+lex_bla.t_ignore_WHITESPACE = r"(\ |\\r|\\t|\\a|\\b|\\cx|\\C-x|\\e|\\f|\\M-\\C-x|\\n|\\d|\\nnn|\\r|\\s|\\v|\\x|\\xnn)+"
+lex_bla.t_ignore_COMMENT = r"(\/\/.*)|()\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 lex_bla.main()
 
 from ..bla.lex_bla import tokens

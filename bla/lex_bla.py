@@ -11,7 +11,9 @@ tokens = {
     "S",
     "M",
     "D",
-
+    "EQUALS",
+    "OPEN_PAREN",
+    "CLOSE_PAREN",
     "WHITESPACE",
     "COMMENT"
 }
@@ -23,6 +25,9 @@ t_A = r"A"
 t_S = r"S"
 t_M = r"M"
 t_D = r"D"
+t_EQUALS = r"="
+t_OPEN_PAREN = r"("
+t_CLOSE_PAREN = r")"
 t_WHITESPACE = r"(\ |\t|\n|\r)+"
 t_COMMENT = r"(\/\/.*)|()\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 

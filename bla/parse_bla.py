@@ -18,16 +18,8 @@ input_file_name = sys.argv[1]
 base_file_name = input_file_name.split(".")[0].strip()
 output_file_name = base_file_name+".ast"
 
-#parser
-p = yacc.yacc()
-
-open(output_file_name, 'w').close()#apparently this works?
-output_file = open(output_file_name, 'a')
-output = p.parse(open(input_file_name, 'r').read())
-output_file.write('Program\n')
-
 def p_program(p):
-    'program : program statement empty'
+    'program : program statement | empty'
     p[0] = []
     for i in range(1, len(p)):
         if p[i]:
@@ -35,7 +27,7 @@ def p_program(p):
     p[0] = tuple(p[0])
 
 def p_empty(p):
-    'empty : '
+    'empty :'
     pass
 
 def p_whitespace(p):
@@ -71,7 +63,7 @@ def p_expression_term(p):
     p[0] = p[1]
 
 def p_term_factor(p):
-    'term: factor'
+    'term : factor'
     p[0] = p[1]
 
 def p_factor_num(p):
@@ -79,7 +71,7 @@ def p_factor_num(p):
     p[0] = "BINARY_LITERAL,"+p[1]
 
 def p_factor_expr(p):
-    'factor: OPEN_PAREN expression CLOSE_PAREN'
+    'factor : OPEN_PAREN expression CLOSE_PAREN'
     p[0] = p[2]
 
 def p_error(p):
@@ -96,4 +88,11 @@ def populate_output_file(output_tuple, depth):
         else:
             output_file.write('\t'*depth+entry+'\n')
 
+#parser
+p = yacc.yacc()
+
+open(output_file_name, 'w').close()#apparently this works?
+output_file = open(output_file_name, 'a')
+output = p.parse(open(input_file_name, 'r').read())
+output_file.write('Program\n')
 populate_output_file(output, 1)

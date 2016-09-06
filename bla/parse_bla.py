@@ -25,6 +25,30 @@ output_file = open(output_file_name, 'a')
 output = p.parse(open(input_file_name, 'r').read())
 output_file.write('Program\n')
 
+def p_program(p):
+    'program : program statement empty'
+    p[0] = []
+    for i in range(1, len(p)):
+        if p[i]:
+            p[0].append(p[i])
+    p[0] = tuple(p[0])
+
+def p_empty(p):
+    'empty : '
+    pass
+
+def p_whitespace(p):
+    'statement : WHITESPACE'
+    p[0] = ""
+
+def p_comment(p):
+    'statement : COMMENT'
+    p[0] = ""
+
+def p_statement(p):
+    'statement : ID EQUALS expression'
+    p[0] = (p[2],"ID,"+p[1], p[3])
+
 def p_expression_plus(p):
     'expression : expression A term'
     p[0] = (p[2], p[1], p[3])

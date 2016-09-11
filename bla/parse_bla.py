@@ -76,7 +76,7 @@ def p_factor_expr(p):
     p[0] = p[2]
 
 def p_factor_id(p):
-    'factor: ID'
+    'factor : ID'
     p[0] = "ID,"+p[1]
 
 def p_error(p):

@@ -11,7 +11,7 @@ lex_bla.t_ignore_WHITESPACE = r"(\ |\r|\t|\n)+"
 lex_bla.t_ignore_COMMENT = r"(\/\/.*)|(\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 lex_bla.main()
 
-from lex_bla import tokens
+from lex_bla import tokens #stuff breaks without this according to 6.1 here http://www.dabeaz.com/ply/ply.html
 
 #second argument to the CL is the name of the file to parse
 input_file_name = sys.argv[1]
@@ -79,6 +79,12 @@ def p_error(p):
     print("Syntax error in input!")
 
 def populate_output_file(output_list, depth):
+    """
+
+    :param output_list: the list of nodes
+    :param depth: The depth of the node
+    :return: exit code 0 if executed without error. Non zero exit code otherwise.
+    """
     #the example in section 6.10 here: http://www.dabeaz.com/ply/ply.html uses tuples, but I like lists
     for entry in output_list:
         if isinstance(entry, list):
@@ -96,5 +102,5 @@ p = yacc.yacc()
 open(output_file_name, 'w').close()#apparently this works?
 output_file = open(output_file_name, 'a')
 output = p.parse(open(input_file_name, 'r').read())
-output_file.write('Program\n')
-populate_output_file(output, 1)
+output_file.write('Program\n') #root node is always program, therefore we can just write it in straight away
+populate_output_file(output, 1) #already written the root node, therefore start one level down

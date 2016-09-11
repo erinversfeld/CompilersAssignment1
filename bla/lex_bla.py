@@ -18,7 +18,7 @@ tokens = (
     "COMMENT"
 )
 
-#rules
+#rules, following convetion demonstrated in 4.1 here http://www.dabeaz.com/ply/ply.html
 t_ID = r"([a-z]|_)([a-z]|_|\d)*"
 t_BINARY_LITERAL = r"(\+|-)?([10])+"
 t_A = r"A"
@@ -28,12 +28,17 @@ t_D = r"D"
 t_EQUALS = r"="
 t_OPEN_PAREN = r"\("
 t_CLOSE_PAREN = r"\)"
+#TODO: ask about nonprintable characters
+#t_WHITESPACE = r"(\ |\r|\t|\n|\a|\b|\cx|\C-x|\e|\f|\M-C-x|\d|\nnn|\s|\v|\x|\xnn)
 t_WHITESPACE = r"(\ |\r|\t|\n)+"
 t_COMMENT = r"(\/\/.*)|(\/\*(.)*?\*\/)|(\/\*(.|\n)*?\*\/)"
 
 def t_error(t):
-   print("Illegal character '%s'" % t.value[0])
-   #don't skip, PLY docs and examples are not always your friend...
+    """
+    Log an error if we come across something unexpected. Won't write to the file, but will print to console.
+    """
+    print("Illegal character '%s'" % t.value[0])
+    #don't skip, PLY docs and examples are not always your friend...
 
 #second argument passed to the command line is the name of the file from which input is to be read
 file_name = sys.argv[1]

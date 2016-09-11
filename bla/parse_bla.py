@@ -25,7 +25,7 @@ def p_program(p):
     for i in range(1, len(p)):
         if p[i]:
             p[0].append(p[i])
-    p[0] = tuple(p[0])
+    p[0] = list(p[0])
 
 def p_empty(p):
     'empty :'
@@ -41,23 +41,23 @@ def p_comment(p):
 
 def p_statement(p):
     'statement : ID EQUALS expression'
-    p[0] = (p[2],"ID,"+p[1], p[3])
+    p[0] = [p[2],"ID,"+p[1], p[3]]
 
 def p_expression_plus(p):
     'expression : expression A term'
-    p[0] = (p[2], p[1], p[3])
+    p[0] = [p[2], p[1], p[3]]
 
 def p_expression_minus(p):
     'expression : expression S term'
-    p[0] = (p[2], p[1], p[3])
+    p[0] = [p[2], p[1], p[3]]
 
 def p_expression_times(p):
     'expression : term M factor'
-    p[0] = (p[2], p[1], p[3])
+    p[0] = [p[2], p[1], p[3]]
 
 def p_expression_div(p):
     'expression : term D factor'
-    p[0] = (p[2], p[1], p[3])
+    p[0] = [p[2], p[1], p[3]]
 
 def p_expression_term(p):
     'expression : term'
@@ -78,10 +78,11 @@ def p_factor_expr(p):
 def p_error(p):
     print("Syntax error in input!")
 
-def populate_output_file(output_tuple, depth):
-    for entry in output_tuple:
-        if isinstance(entry, tuple):
-            if isinstance(entry[0], tuple):
+def populate_output_file(output_list, depth):
+    #the example in section 6.10 here: http://www.dabeaz.com/ply/ply.html uses tuples, but I like lists
+    for entry in output_list:
+        if isinstance(entry, list):
+            if isinstance(entry[0], list):
                 populate_output_file(entry[0:], depth)
             else:
                 output_file.write('\t'*depth+entry[0]+'\n')
